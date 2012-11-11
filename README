@@ -1,0 +1,10 @@
+CSignals
+========
+
+I was just reading the about standard C's signal and raise functions
+and how not portable they are because almost every OS/implementation
+handles things differently (see man pages).
+
+I wanted to make a simple version of my own signals so here it is.
+I'll probably rename the functions and possible refactor or add a few
+things later, when I use this in a larger project.
