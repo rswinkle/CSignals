@@ -57,27 +57,27 @@ int main()
 	sighandler_func old;
 	int caller_data = 1000;
 	
-	init_signals(&some_default);
+	rw_init_signals(&some_default);
 	
 	test = 100;
 	somedata.state = 25;
 	somedata.more_state = 75.5f;
 	
-	mysignal(TEST_1, &myhandler, &caller_data);
-	mysignal(MEM_ERR, &mem_error, &caller_data);
+	rw_signal(TEST_1, &myhandler, &caller_data);
+	rw_signal(MEM_ERR, &mem_error, &caller_data);
 	
-	old = mysignal(TEST_2, IGN_SIG, NULL);
+	old = rw_signal(TEST_2, IGN_SIG, NULL);
 	assert(old == some_default);
 	
 	mystruct = make_struct();
 	
-	myraise(60, NULL);
+	rw_raise(60, NULL);
 	printf("\n\n");
 	
 	
-	myraise(TEST_1, &somedata);
+	rw_raise(TEST_1, &somedata);
 	printf("\n\n");
-	myraise(MEM_ERR, &test);
+	rw_raise(MEM_ERR, &test);
 	
 	
 	
@@ -94,7 +94,7 @@ test_struct* make_struct()
 	size_t sz = sizeof(test_struct);
 	test_struct* tmp = malloc(sz);
 	if (!tmp)
-		myraise(MEM_ERR, &sz);
+		rw_raise(MEM_ERR, &sz);
 
 	return tmp;
 }
